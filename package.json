@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "snowpack build",
     "start": "snowpack dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
