@@ -17,21 +17,21 @@ export default class BinarySearchTree {
   find(x) {
     this.updateNodes = new Set();
 
-    if(!this.root) {
+    if (!this.root) {
       return false;
     }
 
     let node = this.root;
-    while(node.val !== x) {
+    while (node.val !== x) {
       this.updateNodes.add(node);
-      if(x < node.val) {
-        if(!node.left) {
+      if (x < node.val) {
+        if (!node.left) {
           break;
         }
 
         node = node.left;
       } else {
-        if(!node.right) {
+        if (!node.right) {
           break;
         }
 
@@ -39,7 +39,7 @@ export default class BinarySearchTree {
       }
     }
 
-    return (node.val === x);
+    return node.val === x;
   }
 
   insert(x) {
@@ -123,7 +123,7 @@ export default class BinarySearchTree {
     } else if (curr.left && curr.right) {
       let next = curr.right;
 
-      while (curr.left) {
+      while (next.left) {
         this.updateNodes.add(next);
         next = next.left;
       }
@@ -131,7 +131,7 @@ export default class BinarySearchTree {
       this.updateNodes.add(next);
       const nextPrt = next.prt;
 
-      if (curr.isRight(next)) {
+      if (!curr.isRight(next)) {
         nextPrt.setLeft(next.right);
         next.setRight(curr.right);
       }
@@ -147,7 +147,7 @@ export default class BinarySearchTree {
         this.root = next;
       }
 
-      next.setLeft(next.left);
+      next.setLeft(curr.left);
     }
     return curr;
   }
