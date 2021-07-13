@@ -18,6 +18,7 @@
     "snowpack": "^3.8.1"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "animejs": "^3.2.1"
   }
 }

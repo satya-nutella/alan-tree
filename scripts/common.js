@@ -15,11 +15,11 @@ export const randInt = (x) => {
 };
 
 export const setAddRandom = (addTreeNode) => {
-  const input = document.querySelector(`.node-key`);
-  document.querySelector(`.add-random`).onclick = (el) => {
-    const v = randInt(NODE_MAX_KEY + 1);
-    addTreeNode(v);
-    input.value = v;
+  document.body.onkeyup = (e) => {
+    if (e.code === `Space`) {
+      const v = randInt(NODE_MAX_KEY + 1);
+      addTreeNode(v);
+    }
   };
 };
 

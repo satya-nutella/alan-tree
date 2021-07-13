@@ -5,28 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alan Tree</title>
-    <link rel="stylesheet" href="/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/main.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Visualization (Binary Search Tree)</h1>
-    </div>
-    <div class="query-component">
-      <div>
-        <input type="text" class="node-key" placeholder="0 - 100" />
+      <h1 class="title">Visualization (Binary Search Tree)</h1>
+      <div class="query-component">
         <div>
-          <button class="add-random" type="button">Add Random</button>
+          <p>
+            Intructions:
+            <ol>
+              <li>Press `Spacebar` to add a Node</li>
+              <li>Click to delete a Node</li>
+            </ol>
+          </p>
         </div>
       </div>
-    </div>
-    <div class="slider-component">
-      <input type="range" class="anime-slider" />
-    </div>
-    <div>
-      <svg class="canvas">
-        <g class="edges"></g>
-        <g class="nodes"></g>
-      </svg>
+      <div class="slider-component">
+        <input type="range" class="anime-slider" />
+      </div>
+      <div>
+        <svg class="canvas">
+          <g class="edges"></g>
+          <g class="nodes"></g>
+        </svg>
+      </div>
     </div>
   </body>
   <script type="module" src="/index.js"></script>

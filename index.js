@@ -1,4 +1,5 @@
 import anime from "animejs/lib/anime.es";
+import { createPopper } from "@popperjs/core";
 import BinarySearchTree from "./scripts/BinarySearchTree";
 import {
   NODE_W,
