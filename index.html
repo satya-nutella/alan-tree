@@ -5,7 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alan Tree</title>
+    <link rel="stylesheet" href="/main.css">
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <h1>Visualization (Binary Search Tree)</h1>
+    </div>
+    <div class="query-component">
+      <div>
+        <input type="text" class="node-key" placeholder="0 - 100" />
+        <div>
+          <button class="add-random" type="button">Add Random</button>
+        </div>
+      </div>
+    </div>
+    <div class="slider-component">
+      <input type="range" class="anime-slider" />
+    </div>
+    <div>
+      <svg class="canvas">
+        <g class="edges"></g>
+        <g class="nodes"></g>
+      </svg>
+    </div>
+  </body>
   <script type="module" src="/index.js"></script>
 </html>

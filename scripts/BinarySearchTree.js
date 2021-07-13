@@ -1,5 +1,7 @@
 "use strict";
 
+import BaseNode from "./BaseNode";
+
 export class Node extends BaseNode {
   constructor(val) {
     super(val);
@@ -10,6 +12,34 @@ export default class BinarySearchTree {
   constructor() {
     this.root = null;
     this.updateNodes = new Set();
+  }
+
+  find(x) {
+    this.updateNodes = new Set();
+
+    if(!this.root) {
+      return false;
+    }
+
+    let node = this.root;
+    while(node.val !== x) {
+      this.updateNodes.add(node);
+      if(x < node.val) {
+        if(!node.left) {
+          break;
+        }
+
+        node = node.left;
+      } else {
+        if(!node.right) {
+          break;
+        }
+
+        node = node.right;
+      }
+    }
+
+    return (node.val === x);
   }
 
   insert(x) {

@@ -1,0 +1,80 @@
+.box-text {
+  padding: 2px;
+  font-weight: bold;
+}
+
+.query-component {
+  padding-top: 10px;
+}
+
+.slider-component {
+  padding-top: 10px;
+}
+
+.slider-component .anime-slider {
+  width: 200px;
+  height: 16px;
+}
+
+.target-node {
+  fill: #e8917b;
+}
+
+.update-node {
+  fill: #f5db87;
+}
+
+.current-target-node {
+  fill: #ffc8ba;
+}
+.current-node {
+  fill: #fff894;
+}
+
+.normal-node {
+  fill: white;
+}
+
+.deleted-node {
+  fill: gray;
+}
+
+g.node {
+  cursor: pointer;
+}
+
+g.node circle {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  stroke: black;
+  stroke-width: 3px;
+  border: solid 3px black;
+}
+
+path.edge {
+  stroke: #212121;
+  stroke-width: 3px;
+  fill: transparent;
+}
+
+.canvas-parts {
+  width: 100%;
+  height: 100%;
+}
+
+.canvas {
+  overflow: scroll;
+  border: 1px solid #000;
+  margin: 5px;
+  min-height: 400px;
+}
+
+.node-text {
+  font-size: 18px;
+  font-family: sans-serif;
+  color: #212121;
+}

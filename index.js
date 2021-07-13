@@ -1,6 +1,21 @@
-import { timeline } from "animejs";
 import anime from "animejs/lib/anime.es";
 import BinarySearchTree from "./scripts/BinarySearchTree";
+import {
+  NODE_W,
+  NODE_H,
+  BASE_X,
+  BASE_Y,
+  beginChangeColor,
+  createNode,
+  createEdge,
+  defaultChangeCanvasSize,
+  defaultTranslateObj,
+  endChangeColor,
+  removeEdge,
+  removeNode,
+  setAddRandom,
+  traverse
+} from "./scripts/common";
 
 window.onload = () => {
   const tree = new BinarySearchTree();
@@ -8,7 +23,7 @@ window.onload = () => {
   const nodeView = {},
     nodeMap = {};
 
-  let timeline = null;
+  let timeline = null, deleteNodeId = null;
 
   const canvas = document.querySelector(`svg.canvas`);
   const nodes = document.querySelector(`.nodes`);
@@ -96,9 +111,11 @@ window.onload = () => {
       endChangeColor(targetNode, updateNodes);
     };
     const nodeNum = Object.keys(nodeView).length;
-    change_canvas_size(
-      node_num * NODE_W + BASE_X * 2,
-      (max_depth + 1) * NODE_H + BASE_Y * 2
+    changeCanvasSize(
+      nodeNum * NODE_W + BASE_X * 2,
+      (maxDepth + 1) * NODE_H + BASE_Y * 2
     );
   };
+
+  setAddRandom(addTreeNode);
 };

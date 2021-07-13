@@ -76,3 +76,5 @@ export default class BaseNode {
     return this.right === node;
   }
 }
+
+BaseNode.nodeIdGen = 0;
