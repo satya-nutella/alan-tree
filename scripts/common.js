@@ -222,3 +222,44 @@ export const createEdge = (val, id) => {
   newEl.setAttribute(`opacity`, 1.0);
   return newEl;
 };
+
+export const hideNodes = (timeline, targetNodes, targetEdges) => {
+  timeline
+    .add({
+      targets: targetEdges,
+      opacity: 0,
+      duration: 500,
+      easing: `linear`,
+      update: updateHiddenNode(),
+    })
+    .add({
+      targets: targetNodes,
+      opacity: 0,
+      duration: 500,
+      easing: `linear`,
+      update: updateHiddenNode(),
+    });
+};
+
+export const updateHiddenNode = () => {
+  let deleted = false;
+  return (anim) => {
+    if (anim.progress < 100) {
+      if (deleted) {
+        anim.animatables.forEach((e) => {
+          const el = e.target;
+          el.style.display = "";
+        });
+        deleted = false;
+      }
+    } else {
+      if (!deleted) {
+        anim.animatables.forEach((e) => {
+          const el = e.target;
+          el.style.display = "none";
+        });
+        deleted = true;
+      }
+    }
+  };
+};

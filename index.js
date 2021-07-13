@@ -11,10 +11,11 @@ import {
   defaultChangeCanvasSize,
   defaultTranslateObj,
   endChangeColor,
+  hideNodes,
   removeEdge,
   removeNode,
   setAddRandom,
-  traverse
+  traverse,
 } from "./scripts/common";
 
 window.onload = () => {
@@ -23,7 +24,8 @@ window.onload = () => {
   const nodeView = {},
     nodeMap = {};
 
-  let timeline = null, deleteNodeId = null;
+  let timeline = null,
+    deleteNodeId = null;
 
   const canvas = document.querySelector(`svg.canvas`);
   const nodes = document.querySelector(`.nodes`);
@@ -36,10 +38,71 @@ window.onload = () => {
     }
   };
 
+  const removeTreeNode = (v) => {
+    v = parseInt(v);
+    const nodeNum = Object.keys(nodeView).length;
+
+    initTimeline();
+
+    timeline.add({
+      duration: 500,
+    });
+
+    const maxDepth = traverse(tree.root).depth;
+
+    let removedNodeId = null;
+    let targetNode = null;
+
+    if (tree.find(v)) {
+      const node = tree.remove(v);
+
+      targetNode = nodeView[v].node;
+      removedNodeId = node.id;
+
+      hideNodes(
+        timeline,
+        [`g.node${removedNodeId}`],
+        [`path.edge${removedNodeId}`]
+      );
+
+      const result = traverse(tree.root).ps;
+      result[removedNodeId] = [0, 0];
+      translateObj(result);
+
+      delete nodeView[v];
+      delete nodeMap[removedNodeId];
+    }
+
+    const updateNodes = tree
+      .getUpdateNodes()
+      .map((node) => nodeView[node.val].node);
+    timeline.changeBegin = () => {
+      beginChangeColor(targetNode, updateNodes);
+    };
+    timeline.changeComplete = () => {
+      endChangeColor(targetNode, updateNodes);
+    };
+
+    deleteNodeId = removedNodeId;
+
+    changeCanvasSize(
+      nodeNum * NODE_W + BASE_X * 2,
+      (maxDepth + 1) * NODE_H + BASE_Y * 2
+    );
+  };
+
   const addNode = (v, node) => {
     const nodeId = node.id;
-    nodes.appendChild(createNode(v, nodeId));
-    edges.appendChild(createEdge(v, nodeId));
+
+    const newNode = createNode(v, nodeId);
+    const newEdge = createEdge(v, nodeId);
+
+    newNode.onclick = () => {
+      removeTreeNode(v);
+    };
+
+    nodes.appendChild(newNode);
+    edges.appendChild(newEdge);
     const dNode = document.querySelector(`g.node${nodeId}`);
     const dEdge = document.querySelector(`path.edge${nodeId}`);
 
