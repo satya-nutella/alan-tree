@@ -1,0 +1,45 @@
+"on":
+  workflow_dispatch:
+    inputs:
+      pr_branch_from:
+        description: Pull request head branch
+        required: true
+        type: string
+      pr_branch_into:
+        description: Pull request base branch
+        required: true
+        type: string
+      pr_number:
+        description: Pull request number
+        required: true
+        type: number
+      pr_title:
+        description: Pull request title
+        required: true
+        type: string
+name: Porter Preview Environment
+jobs:
+  porter-preview:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2.3.4
+    - name: Create Porter preview env
+      timeout-minutes: 30
+      uses: porter-dev/porter-preview-action@v0.2.0
+      with:
+        action_id: ${{ github.run_id }}
+        cluster: "1"
+        host: https://724a-183-87-174-113.in.ngrok.io
+        installation_id: "30771646"
+        namespace: pr-${{ github.event.inputs.pr_number }}-alan-tree
+        pr_branch_from: ${{ github.event.inputs.pr_branch_from }}
+        pr_branch_into: ${{ github.event.inputs.pr_branch_into }}
+        pr_id: ${{ github.event.inputs.pr_number }}
+        pr_name: ${{ github.event.inputs.pr_title }}
+        project: "1"
+        repo_name: alan-tree
+        repo_owner: meehawk
+        token: ${{ secrets.PORTER_TOKEN_1 }}
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.inputs.pr_number }}
