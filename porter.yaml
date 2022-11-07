@@ -15,11 +15,11 @@ resources:
       method: pack
       builder: heroku/buildpacks:20
     values:
+      ingress:
+        enabled: false
       container:
         command: web
         port: 8000
-        ingress:
-          enabled: false
         env:
           normal:
             POSTGRES_USERNAME: "{ .postgres.postgresqlUsername }"
