@@ -18,6 +18,8 @@ resources:
       container:
         command: web
         port: 8000
+        ingress:
+          enabled: false
         env:
           normal:
             POSTGRES_USERNAME: "{ .postgres.postgresqlUsername }"
